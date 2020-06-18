@@ -32,3 +32,8 @@ jobs:
             branch: master
             tags: true
             repo: simonw/datasette-render-images
+    - stage: Demonstrate tag alpha conditional
+      if: (tag IS present) AND NOT (tag =~ [ab])
+      python: 3.6
+      script:
+        - echo "This is running becaues a or b were not in the tag"
