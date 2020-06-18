@@ -24,4 +24,6 @@ setup(
     py_modules=["datasette_render_images"],
     entry_points={"datasette": ["render_images = datasette_render_images"]},
     install_requires=["datasette"],
+    extras_require={"test": ["pytest"]},
+    tests_require=["datasette-auth-tokens[test]"],
 )
