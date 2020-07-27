@@ -1,6 +1,7 @@
 # datasette-render-images
 
 [![PyPI](https://img.shields.io/pypi/v/datasette-render-images.svg)](https://pypi.org/project/datasette-render-images/)
+[![Changelog](https://img.shields.io/github/v/release/simonw/datasette-render-images?label=changelog)](https://github.com/simonw/datasette-render-images/releases)
 [![Travis CI](https://travis-ci.com/simonw/datasette-render-images.svg?branch=master)](https://travis-ci.com/simonw/datasette-render-images)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/simonw/datasette-json-html/blob/master/LICENSE)
 
