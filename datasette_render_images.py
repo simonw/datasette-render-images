@@ -3,14 +3,20 @@ import base64
 import imghdr
 import jinja2
 
+DEFAULT_SIZE_LIMIT = 100 * 1024
+
 
 @hookimpl
-def render_cell(value):
+def render_cell(value, datasette=None):
+    size_limit = DEFAULT_SIZE_LIMIT
+    if datasette:
+        plugin_config = datasette.plugin_config("datasette-render-images") or {}
+        size_limit = plugin_config.get("size_limit") or DEFAULT_SIZE_LIMIT
     # Only act on byte columns
     if not isinstance(value, bytes):
         return None
-    # Only render images < 100kb
-    if len(value) > 100 * 1024:
+    # Only render images < size_limit (default 100kb)
+    if len(value) > size_limit:
         return None
     # Is this an image?
     image_type = imghdr.what(None, h=value)

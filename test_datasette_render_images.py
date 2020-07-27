@@ -1,4 +1,5 @@
 from datasette_render_images import render_cell
+from datasette.app import Datasette
 import jinja2
 import pytest
 
@@ -48,3 +49,16 @@ def test_render_cell_maximum_image_size():
     assert rendered.startswith("<img src")
     # Add one byte and it should no longer render
     assert None == render_cell(max_image + b"b")
+
+
+def test_render_cell_different_size_limit():
+    max_length = 100 * 1024
+    max_image_plus_one = GIF_1x1 + (b"b" * (max_length - len(GIF_1x1))) + b"b"
+    assert None == render_cell(max_image_plus_one)
+    ds = Datasette(
+        [],
+        metadata={"plugins": {"datasette-render-images": {"size_limit": 101 * 1024}}},
+    )
+    rendered = render_cell(max_image_plus_one, ds)
+    assert rendered is not None
+    assert rendered.startswith("<img src")
