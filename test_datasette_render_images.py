@@ -36,7 +36,7 @@ JPEG = b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x01\x00\x01\x00\x01\x00\x00\xf
     ],
 )
 def test_render_cell(input, expected):
-    actual = render_cell(input)
+    actual = render_cell(input, None)
     assert expected == actual
     assert actual is None or isinstance(actual, jinja2.Markup)
 
@@ -44,17 +44,17 @@ def test_render_cell(input, expected):
 def test_render_cell_maximum_image_size():
     max_length = 100 * 1024
     max_image = GIF_1x1 + (b"b" * (max_length - len(GIF_1x1)))
-    rendered = render_cell(max_image)
+    rendered = render_cell(max_image, None)
     assert rendered is not None
     assert rendered.startswith("<img src")
     # Add one byte and it should no longer render
-    assert None == render_cell(max_image + b"b")
+    assert None == render_cell(max_image + b"b", None)
 
 
 def test_render_cell_different_size_limit():
     max_length = 100 * 1024
     max_image_plus_one = GIF_1x1 + (b"b" * (max_length - len(GIF_1x1))) + b"b"
-    assert None == render_cell(max_image_plus_one)
+    assert None == render_cell(max_image_plus_one, None)
     ds = Datasette(
         [],
         metadata={"plugins": {"datasette-render-images": {"size_limit": 101 * 1024}}},

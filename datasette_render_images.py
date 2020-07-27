@@ -7,7 +7,7 @@ DEFAULT_SIZE_LIMIT = 100 * 1024
 
 
 @hookimpl
-def render_cell(value, datasette=None):
+def render_cell(value, datasette):
     size_limit = DEFAULT_SIZE_LIMIT
     if datasette:
         plugin_config = datasette.plugin_config("datasette-render-images") or {}
