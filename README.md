@@ -19,6 +19,15 @@ If a database row contains binary image data (PNG, GIF or JPEG), this plugin wil
 
 Here's a [demo of the plugin in action](https://datasette-render-images-demo.datasette.io/favicons/favicons).
 
+## Creating a compatible database table
+
+You can use the [sqlite-utils insert-files](https://sqlite-utils.readthedocs.io/en/stable/cli.html#inserting-binary-data-from-files) command to insert image files into a database table:
+
+    $ pip install sqlite-utils
+    $ sqlite-utils insert-files gifs.db images *.gif
+
+See [Fun with binary data and SQLite](https://simonwillison.net/2020/Jul/30/fun-binary-data-and-sqlite/) for more on this tool.
+
 ## Configuration
 
 By default the plugin will only render images that are smaller than 100KB. You can adjust this limit using the `size_limit` plugin configuration option - for example, to increase the limit to 1MB (1000000 bytes) use the following in `metadata.json`:
