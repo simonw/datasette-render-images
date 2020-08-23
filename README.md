@@ -1,9 +1,9 @@
 # datasette-render-images
 
 [![PyPI](https://img.shields.io/pypi/v/datasette-render-images.svg)](https://pypi.org/project/datasette-render-images/)
-[![Changelog](https://img.shields.io/github/v/release/simonw/datasette-render-images?label=changelog)](https://github.com/simonw/datasette-render-images/releases)
-[![Travis CI](https://travis-ci.com/simonw/datasette-render-images.svg?branch=master)](https://travis-ci.com/simonw/datasette-render-images)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/simonw/datasette-json-html/blob/master/LICENSE)
+[![Changelog](https://img.shields.io/github/v/release/simonw/datasette-render-images?include_prereleases&label=changelog)](https://github.com/simonw/datasette-render-images/releases)
+[![Tests](https://github.com/simonw/datasette-render-images/workflows/Test/badge.svg)](https://github.com/simonw/datasette-render-images/actions?query=workflow%3ATest)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/simonw/datasette-render-images/blob/main/LICENSE)
 
 A Datasette plugin that renders binary blob images with data-uris, using the [render_cell() plugin hook](https://datasette.readthedocs.io/en/stable/plugins.html#render-cell-value-column-table-database-datasette).
 
