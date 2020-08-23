@@ -1,0 +1,53 @@
+name: Deploy demo
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: actions/cache@v2
+      name: Configure pip caching
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - uses: actions/cache@v2
+      name: Configure HTTP download caching
+      with:
+        path: ~/data
+        key: ${{ runner.os }}-http-download-cache
+    - name: Install Python dependencies
+      run: pip install sqlite-utils datasette datasette-publish-vercel conditional-get
+    - name: Download database
+      run: |-
+        mkdir -p ~/data
+        conditional-get \
+          --etags ~/data/etags.json \
+          --output ~/data/favicons.db \
+          'https://static.simonwillison.net/static/2020/datasette-render-images-favicons.db'
+    - name: Create Metadata
+      run: |-
+        echo '{
+          "source": "datasette-render-images",
+          "source_url": "https://github.com/simonw/datasette-render-images",
+          "title": "datasette-render-images demo"
+        }' > metadata.json
+    - name: Deploy to Vercel
+      env:
+        NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+      run: |-
+        datasette publish vercel ~/data/favicons.db \
+          -m metadata.json \
+          --alias datasette-json-html-demo.datasette.io \
+          --install=https://github.com/simonw/datasette-render-images/archive/$GITHUB_SHA.zip \
+          --service datasette-json-html-demo
