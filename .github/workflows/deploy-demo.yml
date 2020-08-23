@@ -49,5 +49,5 @@ jobs:
         datasette publish vercel ~/data/favicons.db \
           -m metadata.json \
           --install=https://github.com/simonw/datasette-render-images/archive/$GITHUB_SHA.zip \
-          --project datasette-json-html-demo \
+          --project datasette-render-images-demo \
           --token $NOW_TOKEN
