@@ -5,7 +5,7 @@
 [![Tests](https://github.com/simonw/datasette-render-images/workflows/Test/badge.svg)](https://github.com/simonw/datasette-render-images/actions?query=workflow%3ATest)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/simonw/datasette-render-images/blob/main/LICENSE)
 
-A Datasette plugin that renders binary blob images with data-uris, using the [render_cell() plugin hook](https://datasette.readthedocs.io/en/stable/plugins.html#render-cell-value-column-table-database-datasette).
+A Datasette plugin that renders binary blob images with data-uris, using the [render_cell() plugin hook](https://docs.datasette.io/en/stable/plugins.html#render-cell-value-column-table-database-datasette).
 
 ## Installation
 
@@ -21,7 +21,7 @@ Here's a [demo of the plugin in action](https://datasette-render-images-demo.dat
 
 ## Creating a compatible database table
 
-You can use the [sqlite-utils insert-files](https://sqlite-utils.readthedocs.io/en/stable/cli.html#inserting-binary-data-from-files) command to insert image files into a database table:
+You can use the [sqlite-utils insert-files](https://sqlite-utils.datasette.io/en/stable/cli.html#inserting-binary-data-from-files) command to insert image files into a database table:
 
     $ pip install sqlite-utils
     $ sqlite-utils insert-files gifs.db images *.gif
