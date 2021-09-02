@@ -21,7 +21,7 @@ Here's a [demo of the plugin in action](https://datasette-render-images-demo.dat
 
 ## Creating a compatible database table
 
-You can use the [sqlite-utils insert-files](https://sqlite-utils.datasette.io/en/stable/cli.html#inserting-binary-data-from-files) command to insert image files into a database table:
+You can use the [sqlite-utils insert-files](https://sqlite-utils.datasette.io/en/stable/cli.html#inserting-data-from-files) command to insert image files into a database table:
 
     $ pip install sqlite-utils
     $ sqlite-utils insert-files gifs.db images *.gif
