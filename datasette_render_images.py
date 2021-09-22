@@ -1,7 +1,7 @@
 from datasette import hookimpl
 import base64
 import imghdr
-import jinja2
+from markupsafe import Markup
 
 DEFAULT_SIZE_LIMIT = 100 * 1024
 
@@ -23,7 +23,7 @@ def render_cell(value, datasette):
     if image_type not in ("png", "jpeg", "gif"):
         return None
     # Render as a data-uri
-    return jinja2.Markup(
+    return Markup(
         '<img src="data:image/{};base64,{}" alt="">'.format(
             image_type, base64.b64encode(value).decode("utf8")
         )

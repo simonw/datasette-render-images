@@ -1,6 +1,6 @@
 from datasette_render_images import render_cell
 from datasette.app import Datasette
-import jinja2
+from markupsafe import Markup
 import pytest
 
 GIF_1x1 = b"GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\xff\xff\xff!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x01D\x00;"
@@ -38,7 +38,7 @@ JPEG = b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01\x01\x01\x00\x01\x00\x01\x00\x00\xf
 def test_render_cell(input, expected):
     actual = render_cell(input, None)
     assert expected == actual
-    assert actual is None or isinstance(actual, jinja2.Markup)
+    assert actual is None or isinstance(actual, Markup)
 
 
 def test_render_cell_maximum_image_size():
