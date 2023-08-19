@@ -4,6 +4,8 @@ from markupsafe import Markup
 from os import PathLike
 
 DEFAULT_SIZE_LIMIT = 100 * 1024
+DEFAULT_WIDTH = 300
+DEFAULT_HEIGHT =300
 
 
 @hookimpl
@@ -12,6 +14,8 @@ def render_cell(value, datasette):
     if datasette:
         plugin_config = datasette.plugin_config("datasette-render-images") or {}
         size_limit = plugin_config.get("size_limit") or DEFAULT_SIZE_LIMIT
+        width = plugin_config.get("width") or DEFAULT_WIDTH 
+        height = plugin_config.get("height") or DEFAULT_HEIGHT 
     # Only act on byte columns
     if not isinstance(value, bytes):
         return None
@@ -24,8 +28,8 @@ def render_cell(value, datasette):
         return None
     # Render as a data-uri
     return Markup(
-        '<img src="data:image/{};base64,{}" alt="">'.format(
-            image_type, base64.b64encode(value).decode("utf8")
+        '<img src="data:image/{};base64,{}" alt="" width={} height={}>'.format(
+            image_type, base64.b64encode(value).decode("utf8"), width, height
         )
     )
 
